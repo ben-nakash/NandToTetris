@@ -1,0 +1,64 @@
+/**
+ * This chip is an extended DFF: remembers not only last input, but three 
+ * a(t) = in(t-1) 
+ * b(t) = in(t-2) 
+ * c(t) = in(t-3) 
+ */
+
+CHIP DFF3Step {
+
+    IN in[16];
+	OUT a[16],b[16],c[16];
+
+    PARTS:
+	DFF(in=in[0], out=aOut0, out=a[0]);
+	DFF(in=in[1], out=aOut1, out=a[1]);
+	DFF(in=in[2], out=aOut2, out=a[2]);
+	DFF(in=in[3], out=aOut3, out=a[3]);
+	DFF(in=in[4], out=aOut4, out=a[4]);
+	DFF(in=in[5], out=aOut5, out=a[5]);
+	DFF(in=in[6], out=aOut6, out=a[6]);
+	DFF(in=in[7], out=aOut7, out=a[7]);
+	DFF(in=in[8], out=aOut8, out=a[8]);
+	DFF(in=in[9], out=aOut9, out=a[9]);
+	DFF(in=in[10], out=aOut10, out=a[10]);
+	DFF(in=in[11], out=aOut11, out=a[11]);
+	DFF(in=in[12], out=aOut12, out=a[12]);
+	DFF(in=in[13], out=aOut13, out=a[13]);
+	DFF(in=in[14], out=aOut14, out=a[14]);
+	DFF(in=in[15], out=aOut15, out=a[15]);
+	
+	DFF(in=aOut0, out=bOut0, out=b[0]);
+	DFF(in=aOut1, out=bOut1, out=b[1]);
+	DFF(in=aOut2, out=bOut2, out=b[2]);
+	DFF(in=aOut3, out=bOut3, out=b[3]);
+	DFF(in=aOut4, out=bOut4, out=b[4]);
+	DFF(in=aOut5, out=bOut5, out=b[5]);
+	DFF(in=aOut6, out=bOut6, out=b[6]);
+	DFF(in=aOut7, out=bOut7, out=b[7]);
+	DFF(in=aOut8, out=bOut8, out=b[8]);
+	DFF(in=aOut9, out=bOut9, out=b[9]);
+	DFF(in=aOut10, out=bOut10, out=b[10]);
+	DFF(in=aOut11, out=bOut11, out=b[11]);
+	DFF(in=aOut12, out=bOut12, out=b[12]);
+	DFF(in=aOut13, out=bOut13, out=b[13]);
+	DFF(in=aOut14, out=bOut14, out=b[14]);
+	DFF(in=aOut15, out=bOut15, out=b[15]);
+	
+	DFF(in=bOut0, out=c[0]);
+	DFF(in=bOut1, out=c[1]);
+	DFF(in=bOut2, out=c[2]);
+	DFF(in=bOut3, out=c[3]);
+	DFF(in=bOut4, out=c[4]);
+	DFF(in=bOut5, out=c[5]);
+	DFF(in=bOut6, out=c[6]);
+	DFF(in=bOut7, out=c[7]);
+	DFF(in=bOut8, out=c[8]);
+	DFF(in=bOut9, out=c[9]);
+	DFF(in=bOut10, out=c[10]);
+	DFF(in=bOut11, out=c[11]);
+	DFF(in=bOut12, out=c[12]);
+	DFF(in=bOut13, out=c[13]);
+	DFF(in=bOut14, out=c[14]);
+	DFF(in=bOut15, out=c[15]);
+}

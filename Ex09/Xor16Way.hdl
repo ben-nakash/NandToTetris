@@ -1,0 +1,31 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Xor.hdl
+
+/**
+ *  Exclusive-or gate: out = !(a == b).
+ */
+
+CHIP Xor16Way {
+
+    IN a[16];
+    OUT out;
+
+    PARTS:
+    Xor(a=a[0]  , b=a[1]   ,   out=temp0);
+	Xor(a=a[2]  , b=temp0,   out=temp1);
+	Xor(a=a[3]  , b=temp1,   out=temp2);
+	Xor(a=a[4]  , b=temp2,   out=temp3);
+	Xor(a=a[5]  , b=temp3,   out=temp4);
+	Xor(a=a[6]  , b=temp4,   out=temp5);
+	Xor(a=a[7]  , b=temp5,   out=temp6);
+	Xor(a=a[8]  , b=temp6,   out=temp7);
+	Xor(a=a[9]  , b=temp7,   out=temp8);
+	Xor(a=a[10]  , b=temp8,   out=temp9);
+	Xor(a=a[11], b=temp9,   out=temp10);
+	Xor(a=a[12], b=temp10, out=temp11);
+	Xor(a=a[13], b=temp11, out=temp12);
+	Xor(a=a[14], b=temp12, out=temp13);
+	Xor(a=a[15], b=temp13, out=out);
+}

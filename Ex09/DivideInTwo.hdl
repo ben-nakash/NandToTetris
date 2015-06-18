@@ -1,0 +1,28 @@
+/*
+ * Gets a 16-bit number in[16]
+ * a[16] is a 16-bit result of in/4. (The whole part without fractions)
+ * b[16] is the remainder  - in modulo 4(http://en.wikipedia.org/wiki/Modulo_operation)
+ */
+
+CHIP DivideInTwo {
+    IN in[16];
+    OUT a[16], b;
+
+    PARTS:
+    Mux(a=false, b=true, sel=in[0], out=b);
+	Mux(a=false, b=true, sel=in[1], out=a[0]);
+	Mux(a=false, b=true, sel=in[2], out=a[1]);
+	Mux(a=false, b=true, sel=in[3], out=a[2]);
+	Mux(a=false, b=true, sel=in[4], out=a[3]);
+	Mux(a=false, b=true, sel=in[5], out=a[4]);
+	Mux(a=false, b=true, sel=in[6], out=a[5]);
+	Mux(a=false, b=true, sel=in[7], out=a[6]);
+	Mux(a=false, b=true, sel=in[8], out=a[7]);
+	Mux(a=false, b=true, sel=in[9], out=a[8]);
+	Mux(a=false, b=true, sel=in[10], out=a[9]);
+	Mux(a=false, b=true, sel=in[11], out=a[10]);
+	Mux(a=false, b=true, sel=in[12], out=a[11]);
+	Mux(a=false, b=true, sel=in[13], out=a[12]);
+	Mux(a=false, b=true, sel=in[14], out=a[13]);
+	Mux(a=false, b=true, sel=in[15], out=a[14]);
+}

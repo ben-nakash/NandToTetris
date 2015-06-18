@@ -1,0 +1,26 @@
+/**
+ * Instructions:
+ * The purpose of this chip is ID verification. 
+ * The input is a 16 bit number.
+ * The output verified returns 1 only if this number is the same as the last 4 digits of your ID (in a 16 bit binary representation)
+ * The output parity returns 1 if there is an odd number of 1's in the input, 0 otherwise
+ *  (you can read more on parity bit : http://en.wikipedia.org/wiki/Parity_bit)
+ *	
+ * In this ex you must write your 8-digit number in the first line of the README.txt.
+ * It must contain only a 8 digit number, and no other character
+ */
+
+CHIP Verification {
+    IN in[16];  // 1-bit inputs
+    OUT verified, parity;
+	
+
+    PARTS:
+	// Handling verified.
+    Xor16(a=in, b[0]=true, b[1]=false, b[2]=true, b[3]=false, b[4]=false, b[5]=false, b[6]=false, b[7]=false, b[8]=false, b[9]=false, b[10]=false, b[11]=false, b[12]=false, b[13]=false, b[14]=true, b[15]=false, out=tempOutput0);
+	Or16Way(in=tempOutput0, out=tempOutput1);
+	Mux(a=true, b=false, sel=tempOutput1, out=verified);
+	
+	// Handling Parity
+	Xor16Way(a=in, out=parity);
+}

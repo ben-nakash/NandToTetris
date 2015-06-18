@@ -1,0 +1,105 @@
+/**
+ * The Racket class implements a graphic Racket. A graphic Racket 
+ * has a location on the screen and a size. It also has methods 
+ * for drawing, increasing/decreasing its size and moving left/right on the screen.
+ */
+ 
+class Racket
+ {
+		field int x, y;
+		field int length, height;
+		
+		
+		constructor Racket new()
+		{
+			let x = 226;
+			let y = 250;
+			let length = 60;
+			let height = 4;
+			
+			do drawRacket();
+			return this;
+		}
+		
+		
+		method void dispose()
+		{
+			do Memory.deAlloc(this);
+			return;
+		}
+		
+		
+		method void drawRacket()
+		{
+			do Screen.setColor(true);
+			do Screen.drawRectangle(x, y, x+length, y+height);
+			return;
+		}
+		
+		
+		method void moveRight()
+		{
+				do Screen.setColor(false);
+				do Screen.drawRectangle(x, y, x + 20, y + height);
+				if ((x + length + 20)< 510) {
+					let x = x+20;
+				}
+				else {
+					let x = 510-length;
+				}
+				do Screen.setColor(true);
+				do Screen.drawRectangle(x, y, x + length, y + height);
+
+				return;
+		}
+		
+		
+		method void moveLeft()
+		{
+				do Screen.setColor(false);
+				do Screen.drawRectangle(x+length-20, y, x+length, y + height);
+				if ((x-20) > 0) {
+					let x = x-20;
+				}
+				else {
+					let x = 1;
+				}
+				do Screen.setColor(true);
+				do Screen.drawRectangle(x, y, x + length, y + height);
+
+				return;
+		}
+		
+		method int getAx()
+		{
+				return x;
+		}
+		
+		method int getLength()
+		{
+				return length;
+		}
+		
+		method void increaseLength()
+		{
+			if (length+4 < 101) {
+				let length = length+4;
+				let x = x-2;
+			}
+			do drawRacket();
+			return;
+		}
+		
+		method void decreaseLength()
+		{
+			do Screen.setColor(false);
+			do Screen.drawRectangle(x, y, x+length, y + height);
+			if (length-4 > 20) {
+				let length = length-4;
+				let x = x+2;
+			}
+			do drawRacket();
+			return;
+		}
+ }
+ 

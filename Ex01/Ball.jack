@@ -1,0 +1,200 @@
+/**
+ * The Ball class implements a graphic Ball. A graphic Ball 
+ * has a location on the screen and a size. It also has methods 
+ * for drawing, erasing and moving on the screen.
+ */
+ 
+ class Ball
+ {
+		field int x, y;
+		field int radius;
+		field int direction, midRacket;
+		field const UpRight, UpLeft, DownRight, DownLeft;
+		static int score;
+		
+		constructor Ball new()
+		{
+			let x = 256;
+			let y = 242;
+			let radius = 7;
+			let direction = 0;
+			let UpRight=0;
+			let DownRight=1;
+			let UpLeft=2;
+			let DownLeft=3;
+			let score=0;
+			
+			do drawBall();
+			return this;
+		}
+		
+		// Releasing the memory of the object.
+		method void dispose()
+		{
+			do Memory.deAlloc(this);
+			return;
+		}
+		
+		// Prints the ball on the screen.
+		method void drawBall()
+		{
+			do Screen.setColor(true);
+			do Screen.drawCircle(x, y, radius);
+			return;
+		}
+		
+		
+		function int getScore()
+		{
+			return score;
+		}
+		
+		
+		// Decides in which direction the ball need to go according to the variable
+		method boolean move(int racketX, int length)
+		{
+			do Sys.wait(20);
+			if (direction = UpRight) {
+				do moveUpRight();
+			}
+			if (direction = DownRight) {
+				if (~moveDownRight(racketX, length)) {
+					return false;
+				}
+			}
+			if (direction = UpLeft) {
+				do moveUpLeft();
+			}
+			if (direction=DownLeft) {
+				if(~moveDownLeft(racketX, length)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		// Moves the ball Upward-Right
+		method void moveUpRight()
+		{
+			if ((x+radius+1)>510) {
+				let direction=UpLeft;
+				return;
+			}
+			if((y-radius-1)<100) {
+				let direction=DownRight;
+				return;
+			}
+
+			do Screen.setColor(false);
+            do Screen.drawCircle(x, y, radius);
+			let x = x + 1;
+			let y = y - 1;
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, radius);
+			return;
+		}
+		
+		// Moves the ball Downward-Right.
+		method boolean moveDownRight(int racketX, int length)
+		{
+			// In this case the ball hits the right border of the screen.
+			if((x+radius+1)>510) {
+				let direction=DownLeft;
+				return true;
+			}
+			if((y+radius+1)>249) 
+			{	// In this case the ball hit the right side of the racket
+				if (x<(racketX+length) & x>(racketX+length/2)) 
+				{
+					let direction=UpRight;
+					let score = score+1;
+					return true;
+				}
+				else {
+					// In this case the ball hit the left side of the racket.
+					if (x<(racketX+length/2) & x>racketX) 
+					{
+						let direction=UpLeft;
+						let score = score+1;
+						return true;
+					}
+					// In this case the ball missed the racket.
+					else {
+						return false;
+					}
+				}
+			}
+			
+			do Screen.setColor(false);
+            do Screen.drawCircle(x, y, radius);
+			let x = x + 1;
+			let y = y + 1;
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, radius);
+			return true;
+		}
+		
+		// Moves the ball Upward-Left
+		method void moveUpLeft()
+		{	// In this case the ball hit the left border of the screen.
+			if ((x-radius-1)<0) {
+				let direction=UpRight;
+				return;
+			}
+			// In this case the ball reached the top.
+			if((y-radius-1)<100) {
+				let direction=DownLeft;
+				return;
+			}
+
+			do Screen.setColor(false);
+            do Screen.drawCircle(x, y, radius);
+			let x = x - 1;
+			let y = y - 1;
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, radius);
+			return;
+		}
+		
+		// Moves the ball Downward-Left.
+		method boolean moveDownLeft(int racketX, int length)
+		{
+			let midRacket = length/2;
+			// In this case the ball hit the left border of the screen.
+			if((x-radius-1)<0) {
+				let direction=DownRight;
+				return true;
+			}
+			if((y+radius+1)>249) 
+			{	// In this case the ball hits the right side of the racket.
+				if (x>racketX & x<(racketX+midRacket)) 
+				{
+					let direction=UpLeft;
+					let score = score+1;
+					return true;
+				}
+				else {
+					// In this case the ball hits the left side of the racket.
+					if (x>(racketX+midRacket) & x<(racketX+length))		
+					{
+						let direction=UpRight;
+						let score = score+1;
+						return true;
+					}
+					// In this case the ball missed the racket.
+					else {
+						return false;
+					}
+				}
+			}
+			
+			do Screen.setColor(false);
+            do Screen.drawCircle(x, y, radius);
+			let x = x - 1;
+			let y = y + 1;
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, radius);
+			return true;
+		}
+ }
+ 

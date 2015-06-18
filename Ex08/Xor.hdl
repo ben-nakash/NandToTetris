@@ -1,0 +1,23 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Xor.hdl
+
+/**
+ *  Exclusive-or gate: out = !(a == b).
+ */
+
+CHIP Xor {
+
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    Not(in=b, out=b1);
+	And(a=a, b=b1, out=r1);
+	
+	Not(in=a, out=a1);
+	And(a=a1, b=b, out=r2);
+	
+	Or(a=r1, b=r2, out=out);
+}

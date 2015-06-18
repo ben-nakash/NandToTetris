@@ -1,0 +1,80 @@
+// The RacketGame class represents a game and implements
+// the game's logic.
+
+class RacketGame
+{
+	field Ball ball;
+	field Racket racket;
+	
+	// Initializes the Ball, the Racket & the score.
+	constructor RacketGame new()
+	{
+		let ball = Ball.new();
+		let racket = Racket.new();
+		do Output.printString("Score: ");
+		do Output.printInt(Ball.getScore());
+		return this;
+	}
+	
+	// Freeing the allocated memory of the all the objects - the ball, the racket & itself.
+	method void dispose() 
+	{
+        do ball.dispose();
+		do racket.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+	
+	// Runs the game
+	method void run()
+	{
+		var char key;
+        var boolean exit, start;
+		
+        let exit = false;
+		let start = false;
+		
+		// Waits until the player pressed 'Space', and while that the length of the racket can be changed.
+		while(~start) {
+			let key = Keyboard.keyPressed();
+			if (key=32) {
+				let start=true;
+			}
+			if (key=43) {
+				do racket.increaseLength();
+			}
+			if (key=45) {
+				do racket.decreaseLength();
+			}
+			while (~(key = 0)) {
+                let key = Keyboard.keyPressed();
+            }
+		}
+		
+		// After the player pressed 'Space' it starts running until he press 'q' or lose.
+        while (~exit) 
+		{
+            // waits for a key to be pressed.
+			// 0=none,1=up,2=down,3=left,4=right
+            
+			let key = Keyboard.keyPressed();
+			
+            if (key = 81) {
+                let exit = true;
+            }
+			if (key = 130) {
+                do racket.moveLeft();
+            }
+            if (key = 132) {
+                do racket.moveRight();
+            }
+			if (~ball.move(racket.getAx(), racket.getLength())) {
+				let exit=true;
+			}
+			do Output.moveCursor(0, 7);
+			do Output.printInt(Ball.getScore());
+        }
+            
+        return;
+	}
+}

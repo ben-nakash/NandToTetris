@@ -1,0 +1,15 @@
+ // The Main class initializes a new Racket game and starts it.
+ 
+class Main 
+{
+    /** Initializes a new game and starts it. */    
+    function void main() 
+	{
+        var RacketGame game;
+        let game = RacketGame.new();
+        do game.run();
+		do game.dispose();
+
+        return;
+    }
+}
